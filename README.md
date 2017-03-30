@@ -21,10 +21,9 @@ spring frame work core를 공부한다.
 - 표준 프레임웍 적용
   [가이드]표준프레임워크_적용가이드_v2.3_20130906.hwp
 #################################### Gaols ######################################
-# coreAppNext V.01
 # coreApp V4.0
 
-# coreApp db 이중화 처리 / Transaction 적용
+ coreApp db 이중화 처리 / Transaction 적용
 	db : DB1 / DB1 (사용자정보 / 권한관리)
 	db : DB2 / DB2 (application 관리)
 	user 정보 : 
@@ -34,15 +33,15 @@ spring frame work core를 공부한다.
 	('admin', 'admin', '관리자');
  DB script  프로젝트 내에	/coreApp/webapp/sql/db1/data.sql , coreApp/webapp/sql/db1/table.sql 제공
 
-# coreApp spring security  적용
+ coreApp spring security  적용
  - access denied 처리
  - DB를 이용한 권한관리 미적용 -> To do 
  - 중복 로그인 설정 미적용 -> To do
  
-# 에러 handling 적용
+ 에러 handling 적용
 
 
-# hibernate validatior 적용 -> 구체화 시켜야 함
+ hibernate validatior 적용 -> 구체화 시켜야 함
 
 
 [Study & To Do]
