@@ -1,0 +1,57 @@
+sys 拌沥
+pw : 1q2w3e4r
+
+system 拌沥
+pw : 1q2w3e4r
+
+-TNSLsitner.ORA / Listener.ORA
+C:\oraclexe\app\oracle\product\11.2.0\server\network\ADMIN
+
+-TOAD DB 积己
+http://blog.naver.com/PostView.nhn?blogId=mipta&logNo=150048637893
+
+- DBF 颇老 积己
+C:\oraclexe\app\oracle\oradata\XE\DB1.DBF
+C:\oraclexe\app\oracle\oradata\XE\DB2.DBF
+
+- TABLESPACE 积己
+create tablespace DB1 datafile 'C:\oraclexe\app\oracle\oradata\XE\DB1.DBF'
+size 100m
+autoextend on 
+next 20m
+maxsize 2048;
+
+
+create tablespace DB2 datafile 'C:\oraclexe\app\oracle\oradata\XE\DB2.DBF'
+size 100m
+autoextend on 
+next 20m
+maxsize 2048;
+
+-USER 积己
+create user DB1 identified by DB1
+default tablespace DB1;
+
+create user DB2 identified by DB2
+default tablespace DB2;
+
+
+alter user DB1 account unlock;
+GRANT CREATE SESSION TO DB1; 
+GRANT CONNECT, RESOURCE TO DB1; 
+GRANT CREATE TABLE TO DB1; 
+GRANT CREATE SEQUENCE TO DB1; 
+GRANT CREATE VIEW TO DB1; 
+GRANT CREATE PROCEDURE TO DB1; 
+
+alter user DB2 account unlock;
+GRANT CREATE SESSION TO DB2; 
+GRANT CONNECT, RESOURCE TO DB2; 
+GRANT CREATE TABLE TO DB2; 
+GRANT CREATE SEQUENCE TO DB2; 
+GRANT CREATE VIEW TO DB2; 
+GRANT CREATE PROCEDURE TO DB2; 
+
+############### Oracle DB俊 SID 眠啊 ##################
+
+
