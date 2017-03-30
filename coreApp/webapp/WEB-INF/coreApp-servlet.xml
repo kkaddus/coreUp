@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+		
+	<context:annotation-config />
+	
+	<!-- controller 스캔 : type1 -->
+	<context:component-scan base-package="net.coreApp">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+
+
+	<!-- annotation 기반 스캔 -->
+	<mvc:annotation-driven />
+
+	<!-- css, javascript image 적용을 위한 spring mvc 설정 -->
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/stylesheets/" mapping="/stylesheets/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	
+	<!-- 요청을 intercept 하여 호출전 호출 후에 로깅 처리 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="net.coreApp.common.logging.LoggerInterceptor" id="loggerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+	
+
+	<!-- view resolver 설정 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
+		
+		
+	<!-- user form validator 설정 -->	
+	<bean id="userValidator" class="net.coreApp.validator.security.UserValidator" />
+
+</beans>

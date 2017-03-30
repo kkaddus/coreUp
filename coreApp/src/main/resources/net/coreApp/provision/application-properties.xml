@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>application-properties</comment>
+
+	<!-- h2 in-memory database 설정 -->
+	<!-- <entry key="database.driverClassName">org.h2.Driver</entry> <entry 
+		key="database.url">jdbc:h2:~/coreApp</entry> <entry key="database.username">sa</entry> 
+		<entry key="database.password"></entry> -->
+
+	<!-- db1 설정 : spring security 보안관련 DB -->
+	<entry key="database1.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="database1.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+	<entry key="database1.username">DB1</entry>
+	<entry key="database1.password">DB1</entry>
+
+	<!-- db2 설정 : application 관련 DB -->
+	<entry key="database2.driverClassName">oracle.jdbc.driver.OracleDriver</entry>
+	<entry key="database2.url">jdbc:oracle:thin:@localhost:1521:XE</entry>
+	<entry key="database2.username">DB2</entry>
+	<entry key="database2.password">DB2</entry>
+</properties>
+
+

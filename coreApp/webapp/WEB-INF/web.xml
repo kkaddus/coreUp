@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<display-name>coreApp</display-name>
+	
+	<!-- 1.application context 로드 하도록 설정 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:net/coreApp/provision/applicationContext.xml
+			classpath*:net/coreApp/provision/context-*.xml
+		</param-value>
+	</context-param>
+
+	<!-- 3.인코딩 필터 설정 : form 전송시 utf-8로 설정 함 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 4. REST method 설정 필터 -->
+	<filter>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>hiddenHttpMethodFilter</filter-name>
+		<servlet-name>coreApp</servlet-name>
+	</filter-mapping>
+
+
+	<!-- 2.servlet 설정 -->
+	<servlet>
+		<servlet-name>coreApp</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/coreApp-servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>coreApp</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- Spring Security 관련 셋팅 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	
+	<!-- 
+		url-pattern 태그의 값은 /*로 주도록 한다
+		원래는 spring web을 접근하는 url pattern이 *.do 스타일이라 이 부분도 *.do로 주었는데..
+		이럴 경우 Spring Security 라이브러리에서 내부적으로 작업을 위해 사용하는 url pattern이 *.do 패턴이 아니기 때문에 정상적으로 동작하지 않는다
+		(디폴트 로그인 페이지의 url이 spring_security_login 임을 감안하면 당연 이해가 되는 부분이다)
+		그래서 /*로 주도록 한다
+		이럴 경우 css나 이미지도 Spring Security가 관여할려고 시도할수 있으나..
+		Spring Security 3.1에서는 <http> 엘리먼트를 여러개 사용할 수 있기 때문에
+		Spring Security가 적용되지 말아야 할 url 패턴을 등록할 수 있다
+		
+		<http pattern="/css/**" security="none"/>    
+    	<http pattern="/images/**" security="none"/>
+		
+	-->
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 에러 handling -->
+	<error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/common/error</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/common/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/common/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/common/error</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>405</error-code>
+        <location>/common/error</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/common/error</location>
+    </error-page>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- mybatis type alias 설정 -->
+	<!-- 1.type alias 대상 설정 : package 단위 -->
+	<!-- 2.domain 객체에 alias 설정 : ex) /coreApp/src/main/java/net/coreApp/domain/users/User.java에 alias 설정 @Alias("user") -->
+	<!-- 3.mapper xml에서 type을 domain객체 타입으로 지정 할 수 있다. -->
+	<!-- 4. 아래 쿼리 처럼 alias를 이용하여 domain 객체 지정 한다.
+			<select id="findById" resultType="user">
+				select * from USERS where
+				userId = #{userId}
+			</select> 
+	-->
+	<typeAliases>
+		<package name="net.coreApp.domain"/>
+	</typeAliases>
+	
+	<mappers>
+		<!-- mapper 기술 -->
+		<mapper resource="net/coreApp/dao/application/UserMapper.xml" />
+		<mapper resource="net/coreApp/dao/security/SecurityMapper.xml" />
+	</mappers>
+</configuration>

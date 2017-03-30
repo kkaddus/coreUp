@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+    
+    <!-- ############## data source 설정 #######################-->
+    <!-- db 정보 binding -->
+	<context:property-placeholder location="classpath*:net/coreApp/provision/application-properties.xml" />
+	
+	
+	<!--  ########## application db 설정 start ############## -->
+	<!-- 1.dataSource(connection pooling) 설정 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="${database2.driverClassName}" p:url="${database2.url}"
+		p:username="${database2.username}" p:password="${database2.password}" />
+	
+ 	
+ 	<!--  ########## security db 설정 start ############## -->
+	<!-- 1.dataSource(connection pooling) 설정 -->
+	<bean id="dataSourceSecurity" class="org.apache.commons.dbcp.BasicDataSource"
+		p:driverClassName="${database1.driverClassName}" p:url="${database1.url}"
+		p:username="${database1.username}" p:password="${database1.password}" />
+	
+</beans>
